@@ -139,7 +139,11 @@ static char const * const internalDelegateKey = "DSTBlocksInternalDelegate";
 
 - (void)addButton:(DSTBlockButton *)button {
     DSTAlertViewProxyDelegate *internalDelegate = [self fetchInternalDelegate];
-    [internalDelegate.buttonBlocks addObject:button.block];
+    if (button.block) {
+        [internalDelegate.buttonBlocks addObject:button.block];
+    } else {
+        [internalDelegate.buttonBlocks addObject:[NSNull null]];
+    }
     [self addButtonWithTitle:button.title];
 }
 
